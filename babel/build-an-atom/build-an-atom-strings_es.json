@@ -1,0 +1,458 @@
+{
+  "atom": {
+    "value": "Átomo",
+    "history": [
+      {
+        "userId": 282036,
+        "timestamp": 1480471677697,
+        "oldValue": "",
+        "newValue": "Átomo",
+        "explanation": null
+      }
+    ]
+  },
+  "build-an-atom.title": {
+    "value": "Construye un Núcleo",
+    "history": [
+      {
+        "userId": 282036,
+        "timestamp": 1480471677697,
+        "oldValue": "",
+        "newValue": "Construye un Núcleo",
+        "explanation": null
+      }
+    ]
+  },
+  "chooseYourGame": {
+    "value": "¡Elige un juego!",
+    "history": [
+      {
+        "userId": 282036,
+        "timestamp": 1480471677697,
+        "oldValue": "",
+        "newValue": "¡Elige un juego!",
+        "explanation": null
+      }
+    ]
+  },
+  "electronsColon": {
+    "value": "Electrones:",
+    "history": [
+      {
+        "userId": 282036,
+        "timestamp": 1480471677697,
+        "oldValue": "",
+        "newValue": "Electrones:",
+        "explanation": null
+      }
+    ]
+  },
+  "electronsColonPattern": {
+    "value": "Electrones: {0}",
+    "history": [
+      {
+        "userId": 282036,
+        "timestamp": 1480471677697,
+        "oldValue": "",
+        "newValue": "Electrones: {0}",
+        "explanation": null
+      }
+    ]
+  },
+  "element": {
+    "value": "Elemento",
+    "history": [
+      {
+        "userId": 282036,
+        "timestamp": 1480471677697,
+        "oldValue": "",
+        "newValue": "Elemento",
+        "explanation": null
+      }
+    ]
+  },
+  "findTheElement": {
+    "value": "Encuentra el elemento:",
+    "history": [
+      {
+        "userId": 282036,
+        "timestamp": 1480471677697,
+        "oldValue": "",
+        "newValue": "Encuentra el elemento:",
+        "explanation": null
+      }
+    ]
+  },
+  "game": {
+    "value": "Modo Juego",
+    "history": [
+      {
+        "userId": 282036,
+        "timestamp": 1480471677697,
+        "oldValue": "",
+        "newValue": "Modo Juego",
+        "explanation": null
+      }
+    ]
+  },
+  "ion": {
+    "value": "Ion",
+    "history": [
+      {
+        "userId": 282036,
+        "timestamp": 1480471677697,
+        "oldValue": "Ión",
+        "newValue": "Ion",
+        "explanation": null
+      }
+    ]
+  },
+  "isIt": {
+    "value": "este es:",
+    "history": [
+      {
+        "userId": 282036,
+        "timestamp": 1480471677697,
+        "oldValue": "",
+        "newValue": "este es:",
+        "explanation": null
+      }
+    ]
+  },
+  "neutralAtom": {
+    "value": "Átomo neutro",
+    "history": [
+      {
+        "userId": 282036,
+        "timestamp": 1480471677697,
+        "oldValue": "",
+        "newValue": "Átomo neutro",
+        "explanation": null
+      }
+    ]
+  },
+  "neutrons": {
+    "value": "Neutrones",
+    "history": [
+      {
+        "userId": 282036,
+        "timestamp": 1480471677697,
+        "oldValue": "",
+        "newValue": "Neutrones",
+        "explanation": null
+      }
+    ]
+  },
+  "neutronsColon": {
+    "value": "Neutrones:",
+    "history": [
+      {
+        "userId": 282036,
+        "timestamp": 1480471677697,
+        "oldValue": "",
+        "newValue": "Neutrones:",
+        "explanation": null
+      }
+    ]
+  },
+  "neutronsColonPattern": {
+    "value": "Neutrones: {0}",
+    "history": [
+      {
+        "userId": 282036,
+        "timestamp": 1480471677697,
+        "oldValue": "",
+        "newValue": "Neutrones: {0}",
+        "explanation": null
+      }
+    ]
+  },
+  "neutronAxis": {
+    "value": "Número de neutrones",
+    "history": [
+      {
+        "userId": 282036,
+        "timestamp": 1480471677697,
+        "oldValue": "",
+        "newValue": "Número de neutrones",
+        "explanation": null
+      }
+    ]
+  },
+  "protons": {
+    "value": "Protones",
+    "history": [
+      {
+        "userId": 282036,
+        "timestamp": 1480471677697,
+        "oldValue": "",
+        "newValue": "Protones",
+        "explanation": null
+      }
+    ]
+  },
+  "protonsColon": {
+    "value": "Protones:",
+    "history": [
+      {
+        "userId": 282036,
+        "timestamp": 1480471677697,
+        "oldValue": "",
+        "newValue": "Protones:",
+        "explanation": null
+      }
+    ]
+  },
+  "protonsColonPattern": {
+    "value": "Protones: {0}",
+    "history": [
+      {
+        "userId": 282036,
+        "timestamp": 1480471677697,
+        "oldValue": "",
+        "newValue": "Protones: {0}",
+        "explanation": null
+      }
+    ]
+  },
+  "protonAxis": {
+    "value": "Número de protones",
+    "history": [
+      {
+        "userId": 282036,
+        "timestamp": 1480471677697,
+        "oldValue": "",
+        "newValue": "Número de protones",
+        "explanation": null
+      }
+    ]
+  },
+  "show": {
+    "value": "Mostrar",
+    "history": [
+      {
+        "userId": 282036,
+        "timestamp": 1480471677697,
+        "oldValue": "",
+        "newValue": "Mostrar",
+        "explanation": null
+      }
+    ]
+  },
+  "stableSlashUnstable": {
+    "value": "Estable/Inestable",
+    "history": [
+      {
+        "userId": 282036,
+        "timestamp": 1480471677697,
+        "oldValue": "",
+        "newValue": "Estable/Inestable",
+        "explanation": null
+      }
+    ]
+  },
+  "symbol": {
+    "value": "Símbolo",
+    "history": [
+      {
+        "userId": 282036,
+        "timestamp": 1480471677697,
+        "oldValue": "",
+        "newValue": "Símbolo",
+        "explanation": null
+      }
+    ]
+  },
+  "whatIsTheMassNumber": {
+    "value": "¿Cuál es el número másico?",
+    "history": [
+      {
+        "userId": 282036,
+        "timestamp": 1480471677697,
+        "oldValue": "",
+        "newValue": "¿Cuál es el número másico?",
+        "explanation": null
+      }
+    ]
+  },
+  "whatIsTheTotalCharge": {
+    "value": "¿Cuál es la carga total?",
+    "history": [
+      {
+        "userId": 282036,
+        "timestamp": 1480471677697,
+        "oldValue": "",
+        "newValue": "¿Cuál es la carga total?",
+        "explanation": null
+      }
+    ]
+  },
+  "partialNuclideChart": {
+    "value": "Tabla Parcial de los Nucleidos",
+    "history": [
+      {
+        "userId": 282036,
+        "timestamp": 1480471677697,
+        "oldValue": "",
+        "newValue": "Tabla Parcial de los Nucleidos",
+        "explanation": null
+      }
+    ]
+  },
+  "fullNuclideChart": {
+    "value": "Tabla Completa de los Nucleidos",
+    "history": [
+      {
+        "userId": 282036,
+        "timestamp": 1480471677697,
+        "oldValue": "",
+        "newValue": "Tabla Completa de los Nucleidos",
+        "explanation": null
+      }
+    ]
+  },
+  "alphaDecay": {
+    "value": "Decaimiento α",
+    "history": [
+      {
+        "userId": 282036,
+        "timestamp": 1480471677697,
+        "oldValue": "",
+        "newValue": "Decaimiento α",
+        "explanation": null
+      }
+    ]
+  },
+  "betaMinusDecay": {
+    "value": "Decaimiento β-",
+    "history": [
+      {
+        "userId": 282036,
+        "timestamp": 1480471677697,
+        "oldValue": "",
+        "newValue": "Decaimiento β-",
+        "explanation": null
+      }
+    ]
+  },
+  "betaPlusDecay": {
+    "value": "Decaimiento β+ /",
+    "history": [
+      {
+        "userId": 282036,
+        "timestamp": 1480471677697,
+        "oldValue": "",
+        "newValue": "Decaimiento β+ /",
+        "explanation": null
+      }
+    ]
+  },
+  "electronCapture": {
+    "value": "captura electrónica",
+    "history": [
+      {
+        "userId": 282036,
+        "timestamp": 1480471677697,
+        "oldValue": "",
+        "newValue": "captura electrónica",
+        "explanation": null
+      }
+    ]
+  },
+  "neutronEmission": {
+    "value": "Emisión de neutrones",
+    "history": [
+      {
+        "userId": 282036,
+        "timestamp": 1480471677697,
+        "oldValue": "",
+        "newValue": "Emisión de neutrones",
+        "explanation": null
+      }
+    ]
+  },
+  "protonEmission": {
+    "value": "Emisión de protones",
+    "history": [
+      {
+        "userId": 282036,
+        "timestamp": 1480471677697,
+        "oldValue": "",
+        "newValue": "Emisión de protones",
+        "explanation": null
+      }
+    ]
+  },
+  "stable": {
+    "value": "Estable",
+    "history": [
+      {
+        "userId": 282036,
+        "timestamp": 1480471677697,
+        "oldValue": "",
+        "newValue": "Estable",
+        "explanation": null
+      }
+    ]
+  },
+  "unstable": {
+    "value": "Inestable",
+    "history": [
+      {
+        "userId": 282036,
+        "timestamp": 1480471677697,
+        "oldValue": "",
+        "newValue": "Inestable",
+        "explanation": null
+      }
+    ]
+  },
+  "selected": {
+    "value": "Seleccionado",
+    "history": [
+      {
+        "userId": 282036,
+        "timestamp": 1480471677697,
+        "oldValue": "",
+        "newValue": "Seleccionado",
+        "explanation": null
+      }
+    ]
+  },
+  "magicNumbers": {
+    "value": "Números mágicos",
+    "history": [
+      {
+        "userId": 282036,
+        "timestamp": 1480471677697,
+        "oldValue": "",
+        "newValue": "Números mágicos",
+        "explanation": null
+      }
+    ]
+  },
+  "doesNotForm": {
+    "value": "No se forma",
+    "history": [
+      {
+        "userId": 282036,
+        "timestamp": 1480471677697,
+        "oldValue": "",
+        "newValue": "No se forma",
+        "explanation": null
+      }
+    ]
+  },
+  "energyEducationWebsite": {
+    "value": "Sitio web Energy Education",
+    "history": [
+      {
+        "userId": 282036,
+        "timestamp": 1480471677697,
+        "oldValue": "",
+        "newValue": "Sitio web Energy Education",
+        "explanation": null
+      }
+    ]
+  }
+}
