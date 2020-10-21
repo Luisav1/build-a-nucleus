@@ -1,0 +1,116 @@
+{
+  "ion": {
+    "value": "Ion"
+  },
+  "stableSlashUnstable": {
+    "value": "Stable/Unstable"
+  },
+  "symbol": {
+    "value": "Symbol"
+  },
+  "findTheElement": {
+    "value": "Find the element:"
+  },
+  "atom": {
+    "value": "Atom"
+  },
+  "element": {
+    "value": "Element"
+  },
+  "whatIsTheMassNumber": {
+    "value": "What is the\nmass number?"
+  },
+  "build-an-atom.title": {
+    "value": "Build a Nucleus"
+  },
+  "whatIsTheTotalCharge": {
+    "value": "What is the\ntotal charge?"
+  },
+  "electronsColon": {
+    "value": "Electrons:"
+  },
+  "electronsColonPattern": {
+    "value": "Electrons: {0}"
+  },
+  "game": {
+    "value": "Game"
+  },
+  "neutralAtom": {
+    "value": "Neutral Atom"
+  },
+  "neutrons": {
+    "value": "Neutrons"
+  },
+  "protonsColon": {
+    "value": "Protons:"
+  },
+  "protonsColonPattern": {
+    "value": "Protons: {0}"
+  },
+  "protonAxis": {
+    "value": "Proton number"
+  },
+  "neutronsColon": {
+    "value": "Neutrons:"
+  },
+  "neutronsColonPattern": {
+    "value": "Neutrons: {0}"
+  },
+  "neutronAxis": {
+    "value": "Neutron number"
+  },
+  "isIt": {
+    "value": "Is it:"
+  },
+  "protons": {
+    "value": "Protons"
+  },
+  "show": {
+    "value": "Show"
+  },
+  "chooseYourGame": {
+    "value": "Choose Your Game!"
+  },
+  "partialNuclideChart": {
+    "value": "Partial Nuclide Chart"
+  },
+  "fullNuclideChart": {
+    "value": "Full Nuclide Chart"
+  },
+  "alphaDecay": {
+    "value": "α decay"
+  },
+  "betaMinusDecay": {
+    "value": "β- decay"
+  },
+  "betaPlusDecay": {
+    "value": "β+ decay /"
+  },
+  "electronCapture": {
+    "value": "electron capture"
+  },
+  "neutronEmission": {
+    "value": "Neutron emission"
+  },
+  "protonEmission": {
+    "value": "Proton emission"
+  },
+  "stable": {
+    "value": "Stable"
+  },
+  "unstable": {
+    "value": "Unstable"
+  },
+  "selected": {
+    "value": "Selected"
+  },
+  "magicNumbers": {
+    "value": "Magic numbers"
+  },
+  "doesNotForm": {
+    "value": "Does not form"
+  },
+  "energyEducationWebsite": {
+    "value": "Energy Education website..."
+  }
+}
