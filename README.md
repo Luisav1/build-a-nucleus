@@ -1,15 +1,58 @@
-# Build a Nucleus
-Build a Nucleus simulation is adapted from PhET sims Build an Atom simulation. 
+Build an Atom
+=============
+"Build an Atom" is an educational simulation in HTML5, by <a href="https://phet.colorado.edu/" target="_blank">PhET Interactive Simulations</a>
+at the University of Colorado Boulder.
+For a description of this simulation, associated resources, and a link to the published version,
+<a href="https://phet.colorado.edu/en/simulation/build-an-atom" target="_blank">visit the simulation's web page</a>.
 
-The simulation is available in English at https://energyeducation.ca/simulations/build-a-nucleus/build-a-nucleus_en.html.
+### Try it!
 
-The other languages available are: 
-	<li><a target="_blank" href="https://energyeducation.ca/simulations/build-a-nucleus/build-a-nucleus_es.html">Build a Nucleus (Spanish)</a></li>
-	<li><a target="_blank" href="https://energyeducation.ca/simulations/build-a-nucleus/build-a-nucleus_fr.html">Build a Nucleus (French)</a></li>
-	<li><a target="_blank" href="https://energyeducation.ca/simulations/build-a-nucleus/build-a-nucleus_it.html">Build a Nucleus (Italian)</a></li>
-	<li><a target="_blank" href="https://energyeducation.ca/simulations/build-a-nucleus/build-a-nucleus_pt.html">Build a Nucleus (Portuguese)</a></li>
-	<li><a target="_blank" href="https://energyeducation.ca/simulations/build-a-nucleus/build-a-nucleus_pt_BR.html">Build a Nucleus (Portuguese - Brazil)</a></li>
-	<li><a target="_blank" href="https://energyeducation.ca/simulations/build-a-nucleus/build-a-nucleus_de.html">Build a Nucleus (German)</a></li>
-	<li><a target="_blank" href="https://energyeducation.ca/simulations/build-a-nucleus/build-a-nucleus_nl.html">Build a Nucleus (Dutch)</a></li>
-	<li><a target="_blank" href="https://energyeducation.ca/simulations/build-a-nucleus/build-a-nucleus_zh_CN.html">Build a Nucleus (Simplified Chinese)</a></li>
-	<li><a target="_blank" href="https://energyeducation.ca/simulations/build-a-nucleus/build-a-nucleus_ar.html">Build a Nucleus (Arabic)</a></li>
+<a href="https://phet.colorado.edu/sims/html/build-an-atom/latest/build-an-atom_en.html" target="_blank">Click here to run "Build an Atom".</a>
+
+<a href="https://phet.colorado.edu/sims/html/build-an-atom/latest/build-an-atom_en.html" target="_blank">
+<img src="https://raw.githubusercontent.com/phetsims/build-an-atom/master/assets/build-an-atom-screenshot.png" alt="Screenshot" style="width: 400px;"/>
+</a>
+
+### Documentation
+The <a href="https://github.com/phetsims/phet-info/blob/master/doc/phet-development-overview.md" target="_blank">PhET Development Overview</a> is the most complete guide to PhET Simulation
+Development. This guide includes how to obtain simulation code and its dependencies, notes about architecture & design, how to test and build
+the sims, as well as other important information.
+
+### Quick Start
+(1) Clone the simulation and its dependencies:
+```
+git clone https://github.com/phetsims/assert.git
+git clone https://github.com/phetsims/axon.git
+git clone https://github.com/phetsims/babel.git
+git clone https://github.com/phetsims/brand.git
+git clone https://github.com/phetsims/build-an-atom.git
+git clone https://github.com/phetsims/chipper.git
+git clone https://github.com/phetsims/dot.git
+git clone https://github.com/phetsims/joist.git
+git clone https://github.com/phetsims/kite.git
+git clone https://github.com/phetsims/phet-core.git
+git clone https://github.com/phetsims/phetcommon.git
+git clone https://github.com/phetsims/phetmarks.git
+git clone https://github.com/phetsims/query-string-machine.git
+git clone https://github.com/phetsims/scenery.git
+git clone https://github.com/phetsims/scenery-phet.git
+git clone https://github.com/phetsims/sherpa.git
+git clone https://github.com/phetsims/shred.git
+git clone https://github.com/phetsims/sun.git
+git clone https://github.com/phetsims/tambo.git
+git clone https://github.com/phetsims/tandem.git
+git clone https://github.com/phetsims/utterance-queue.git
+git clone https://github.com/phetsims/vegas.git
+```
+(2) Start an http-server
+
+(3) Open `http://localhost/build-an-atom/build-an-atom_en.html` (You will probably need to modify this URL based on your HTTP port and relative path.)
+
+### Get Involved
+
+Contact us at our Google Group: <a href="http://groups.google.com/forum/#!forum/developing-interactive-simulations-in-html5" target="_blank">Developing Interactive Simulations in HTML5</a>
+
+Help us improve, create a <a href="http://github.com/phetsims/build-an-atom/issues/new" target="_blank">New Issue</a>
+
+### License
+See the <a href="https://github.com/phetsims/build-an-atom/blob/master/LICENSE" target="_blank">LICENSE</a>
