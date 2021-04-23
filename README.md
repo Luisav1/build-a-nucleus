@@ -1,9 +1,13 @@
 # Build a Nucleus
 Build a Nucleus simulation is adapted from PhET sims Build an Atom simulation. 
 
-The simulation is available in English at https://energyeducation.ca/simulations/build-a-nucleus/build-a-nucleus_en.html.
+The simulation is available in English <a target="_blank" href="https://energyeducation.ca/simulations/build-a-nucleus/build-a-nucleus_en.html">here</a>.
 
-The other languages available are: 
+<a href="https://energyeducation.ca/simulations/build-a-nucleus/build-a-nucleus_en.html" target="_blank">
+<img src="https://energyeducation.ca/simulations/build-a-nucleus/images/build-a-nucleus-600.png" alt="Screenshot" style="width: 400px;"/>
+</a>
+
+All languages available are: 
 	<li><a target="_blank" href="https://energyeducation.ca/simulations/build-a-nucleus/build-a-nucleus_en.html">Build a Nucleus (English)</a></li>
 	<li><a target="_blank" href="https://energyeducation.ca/simulations/build-a-nucleus/build-a-nucleus_es.html">Build a Nucleus (Spanish)</a></li>
 	<li><a target="_blank" href="https://energyeducation.ca/simulations/build-a-nucleus/build-a-nucleus_fr.html">Build a Nucleus (French)</a></li>
