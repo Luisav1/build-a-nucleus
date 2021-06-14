@@ -2,13 +2,16 @@
 
 /**
  * ScreenView that presents an interactive atom on the left side, buckets of particles underneath, and controls for
- * label visibility and reset.  A periodic table is included on the right side.  This is intended to be used as a base
- * type for screens with similar views.
+ * label visibility and reset.  A periodic table is included on the right side.  A nuclide chart is included at the
+ * bottom right side. This is intended to be used as a base type for screens with similar views.
+ *
+ * Center X position determined here, particle count display here too
  *
  * @author John Blanco
  * @author Aadish Gupta
  */
 
+import merge from '../../../../phet-core/js/merge.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
@@ -22,36 +25,36 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import ShredConstants from '../../../../shred/js/ShredConstants.js';
-import AtomNode from '../../../../shred/js/view/AtomNode.js';
-import BucketDragHandler from '../../../../shred/js/view/BucketDragHandler.js';
-import ParticleCountDisplay from '../../../../shred/js/view/ParticleCountDisplay.js';
-import ParticleView from '../../../../shred/js/view/ParticleView.js';
+import ShredConstants from '../../../../shred2/js/ShredConstants.js';
+import AtomNode from '../../../../shred2/js/view/AtomNode.js';
+import BucketDragHandler from '../../../../shred2/js/view/BucketDragHandler.js';
+import ParticleAtomDisplay from '../../../../shred2/js/view/ParticleAtomDisplay.js';
+import ParticleView from '../../../../shred2/js/view/ParticleView.js';
 import AccordionBox from '../../../../sun/js/AccordionBox.js';
-import AquaRadioButton from '../../../../sun/js/AquaRadioButton.js';
 import Panel from '../../../../sun/js/Panel.js';
 import VerticalCheckboxGroup from '../../../../sun/js/VerticalCheckboxGroup.js';
 import buildAnAtom from '../../buildAnAtom.js';
 import PeriodicTableAndSymbol from '../../buildanatom/view/PeriodicTableAndSymbol.js';
+import NuclideChart from '../../buildanatom/view/NuclideChart.js';
 import buildAnAtomStrings from '../../buildAnAtomStrings.js';
 import BAASharedConstants from '../BAASharedConstants.js';
+import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
+import openPopup from '../../../../phet-core/js/openPopup.js';
+import MultiLineText from '../../../../scenery-phet/js/MultiLineText.js';
 
-const cloudString = buildAnAtomStrings.cloud;
 const elementString = buildAnAtomStrings.element;
-const modelString = buildAnAtomStrings.model;
-const neutralSlashIonString = buildAnAtomStrings.neutralSlashIon;
-const orbitsString = buildAnAtomStrings.orbits;
+const partialNuclideChartString = buildAnAtomStrings.partialNuclideChart;
 const showString = buildAnAtomStrings.show;
 const stableSlashUnstableString = buildAnAtomStrings.stableSlashUnstable;
+const fullNuclideChartString = buildAnAtomStrings.fullNuclideChart;
 
 // constants
 const CONTROLS_INSET = 10;
 const LABEL_CONTROL_FONT = new PhetFont( 12 );
 const LABEL_CONTROL_MAX_WIDTH = 180;
 const LABEL_CONTROL_LINE_WIDTH = 1;
-const ELECTRON_VIEW_CONTROL_FONT = new PhetFont( 12 );
-const ELECTRON_VIEW_CONTROL_MAX_WIDTH = 60;
 const NUM_NUCLEON_LAYERS = 5; // This is based on max number of particles, may need adjustment if that changes.
+const INTER_BOX_SPACING = 7;
 
 /**
  * @param {BuildAnAtomModel} model
@@ -59,7 +62,6 @@ const NUM_NUCLEON_LAYERS = 5; // This is based on max number of particles, may n
  * @constructor
  */
 function AtomView( model, tandem ) {
-
 
   ScreenView.call( this, {
     layoutBounds: ShredConstants.LAYOUT_BOUNDS,
@@ -75,16 +77,20 @@ function AtomView( model, tandem ) {
     tandem: tandem.createTandem( 'periodicTableAccordionBoxExpandedProperty' )
   } );
 
+  // @protected for nuclideChart
+  this.nuclideChartAccordionBoxExpandedProperty = new BooleanProperty( true, {
+    tandem: tandem.createTandem( 'nuclideChartAccordionBoxExpandedProperty' )
+  } );
+
   // Create the model-view transform.
   const modelViewTransform = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
     Vector2.ZERO,
-    new Vector2( self.layoutBounds.width * 0.3, self.layoutBounds.height * 0.45 ),
-    1.0 );
+    new Vector2( self.layoutBounds.width * 0.235, self.layoutBounds.height * 0.45 ),
+    1.0 );//moves the center X
 
   // Add the node that shows the textual labels, the electron shells, and the center X marker.
   const atomNode = new AtomNode( model.particleAtom, modelViewTransform, {
     showElementNameProperty: model.showElementNameProperty,
-    showNeutralOrIonProperty: model.showNeutralOrIonProperty,
     showStableOrUnstableProperty: model.showStableOrUnstableProperty,
     electronShellDepictionProperty: model.electronShellDepictionProperty,
     tandem: tandem.createTandem( 'atomNode' )
@@ -118,7 +124,6 @@ function AtomView( model, tandem ) {
 
   // Add the nucleon particle views.
   const nucleonsGroupTandem = tandem.createGroupTandem( 'nucleons' );
-  const electronsGroupTandem = tandem.createGroupTandem( 'electrons' );
 
   // add the nucleons
   const particleDragBounds = modelViewTransform.viewToModelBounds( this.layoutBounds );
@@ -163,21 +168,13 @@ function AtomView( model, tandem ) {
     } );
   } );
 
-  // Add the electron particle views.
-  model.electrons.forEach( function( electron ) {
-    electronLayer.addChild( new ParticleView( electron, modelViewTransform, {
-      dragBounds: particleDragBounds,
-      tandem: electronsGroupTandem.createNextTandem()
-    } ) );
-  } );
-
   // When the electrons are represented as a cloud, the individual particles become invisible when added to the atom.
   const updateElectronVisibility = function() {
     electronLayer.getChildren().forEach( function( electronNode ) {
       electronNode.visible = model.electronShellDepictionProperty.get() === 'orbits' || !model.particleAtom.electrons.includes( electronNode.particle );
     } );
   };
-  model.particleAtom.electrons.lengthProperty.link( updateElectronVisibility );
+  /// model.particleAtom.electrons.lengthProperty.link( updateElectronVisibility );
   model.electronShellDepictionProperty.link( updateElectronVisibility );
 
   // Add the front portion of the buckets. This is done separately from the bucket holes for layering purposes.
@@ -193,11 +190,11 @@ function AtomView( model, tandem ) {
     } ) );
   } );
 
-  // Add the particle count indicator.
-  const particleCountDisplay = new ParticleCountDisplay( model.particleAtom, 13, 250, {
-    tandem: tandem.createTandem( 'particleCountDisplay' )
+  // Add the particle atom small nucleus on the top middle.
+  const particleAtomDisplay = new ParticleAtomDisplay( model.particleAtom, {
+    tandem: tandem.createTandem( 'particleAtomDisplay' )
   } );  // Width arbitrarily chosen.
-  this.addChild( particleCountDisplay );
+  this.addChild( particleAtomDisplay );
 
   // Add the periodic table display inside of an accordion box.
   const periodicTableAndSymbol = new PeriodicTableAndSymbol(
@@ -234,8 +231,44 @@ function AtomView( model, tandem ) {
   } );
   this.addChild( this.periodicTableAccordionBox );
 
+  //add the chart of the nuclides inside of an accordion box
+  const nuclideChart = new NuclideChart(
+    model.particleAtom,
+    tandem.createTandem( 'nuclideChart' ),
+    {
+      pickable: false
+    }
+  );
+  nuclideChart.scale( 0.65 ); // 0.55 // Scale empirically determined to match layout in design doc.
+  const nuclideChartAccordionBoxTandem = tandem.createTandem( 'nuclideChartAccordionBox' );
+  this.nuclideChartAccordionBox = new AccordionBox( nuclideChart, {
+    cornerRadius: 3,
+    titleNode: new Text( partialNuclideChartString, {
+      font: ShredConstants.ACCORDION_BOX_TITLE_FONT,
+      maxWidth: ShredConstants.ACCORDION_BOX_TITLE_MAX_WIDTH,
+      tandem: nuclideChartAccordionBoxTandem.createTandem( 'title' )
+    } ),
+    fill: ShredConstants.DISPLAY_PANEL_BACKGROUND_COLOR,
+    minWidth: 110 + 7 + this.periodicTableAccordionBox.width,
+    contentAlign: 'left',
+    titleAlignX: 'left',
+    buttonAlign: 'right',
+    expandedProperty: this.nuclideChartAccordionBoxExpandedProperty,
+    expandCollapseButtonOptions: {
+      touchAreaXDilation: 12,
+      touchAreaYDilation: 12
+    },
+
+    // phet-io
+    tandem: nuclideChartAccordionBoxTandem,
+
+    // pdom
+    labelContent: partialNuclideChartString
+  } );
+  this.addChild( this.nuclideChartAccordionBox );
+
   const labelVisibilityControlPanelTandem = tandem.createTandem( 'labelVisibilityControlPanel' );
-  const labelVisibilityControlPanel = new Panel( new VerticalCheckboxGroup( [ {
+  const labelVisibilityControlPanel = new Panel( new VerticalCheckboxGroup( [/* {
     node: new Text( elementString, {
       font: LABEL_CONTROL_FONT,
       maxWidth: LABEL_CONTROL_MAX_WIDTH,
@@ -243,15 +276,7 @@ function AtomView( model, tandem ) {
     } ),
     property: model.showElementNameProperty,
     tandem: labelVisibilityControlPanelTandem.createTandem( 'showElementNameCheckbox' )
-  }, {
-    node: new Text( neutralSlashIonString, {
-      font: LABEL_CONTROL_FONT,
-      maxWidth: LABEL_CONTROL_MAX_WIDTH,
-      tandem: labelVisibilityControlPanelTandem.createTandem( 'neutralOrIonText' )
-    } ),
-    property: model.showNeutralOrIonProperty,
-    tandem: labelVisibilityControlPanelTandem.createTandem( 'showNeutralOrIonCheckbox' )
-  }, {
+  },*/ {
     node: new Text( stableSlashUnstableString, {
       font: LABEL_CONTROL_FONT,
       maxWidth: LABEL_CONTROL_MAX_WIDTH,
@@ -271,7 +296,7 @@ function AtomView( model, tandem ) {
     resize: false,
     tandem: labelVisibilityControlPanelTandem
   } );
-  const numDividerLines = 2;
+  const numDividerLines = 0;//since took out ion/neutral this is now 1 instead of 2
   const dividerLineShape = new Shape().moveTo( 0, 0 ).lineTo( labelVisibilityControlPanel.width - 2 * LABEL_CONTROL_LINE_WIDTH, 0 );
   for ( let dividerLines = 0; dividerLines < numDividerLines; dividerLines++ ) {
     const dividerLine1 = new Path( dividerLineShape, {
@@ -291,48 +316,6 @@ function AtomView( model, tandem ) {
   } );
   this.addChild( labelVisibilityControlPanelTitle );
 
-  // Add the radio buttons that control the electron representation in the atom.
-  const radioButtonRadius = 6;
-  const orbitsRadioButtonTandem = tandem.createTandem( 'orbitsRadioButton' );
-  const orbitsRadioButton = new AquaRadioButton(
-    model.electronShellDepictionProperty,
-    'orbits',
-    new Text( orbitsString, {
-        font: ELECTRON_VIEW_CONTROL_FONT,
-        maxWidth: ELECTRON_VIEW_CONTROL_MAX_WIDTH,
-        tandem: orbitsRadioButtonTandem.createTandem( 'orbitsText' )
-      }
-    ),
-    { radius: radioButtonRadius, tandem: orbitsRadioButtonTandem }
-  );
-  const cloudRadioButtonTandem = tandem.createTandem( 'cloudRadioButton' );
-  const cloudRadioButton = new AquaRadioButton(
-    model.electronShellDepictionProperty,
-    'cloud',
-    new Text( cloudString, {
-      font: ELECTRON_VIEW_CONTROL_FONT,
-      maxWidth: ELECTRON_VIEW_CONTROL_MAX_WIDTH,
-      tandem: cloudRadioButtonTandem.createTandem( 'cloudText' )
-    } ),
-    { radius: radioButtonRadius, tandem: cloudRadioButtonTandem }
-  );
-  const electronViewButtonGroup = new Node( { tandem: tandem.createTandem( 'electronViewButtonGroup' ) } );
-  electronViewButtonGroup.addChild( new Text( modelString, {
-    font: new PhetFont( {
-      size: 14,
-      weight: 'bold'
-    } ),
-    maxWidth: ELECTRON_VIEW_CONTROL_MAX_WIDTH + 20,
-    tandem: tandem.createTandem( 'electronViewButtonGroupLabel' )
-  } ) );
-  orbitsRadioButton.top = electronViewButtonGroup.bottom + 5;
-  orbitsRadioButton.left = electronViewButtonGroup.left;
-  electronViewButtonGroup.addChild( orbitsRadioButton );
-  cloudRadioButton.top = electronViewButtonGroup.bottom + 5;
-  cloudRadioButton.left = electronViewButtonGroup.left;
-  electronViewButtonGroup.addChild( cloudRadioButton );
-  this.addChild( electronViewButtonGroup );
-
   // Add the reset button.
   const resetAllButton = new ResetAllButton( {
     listener: function() {
@@ -346,17 +329,37 @@ function AtomView( model, tandem ) {
   } );
   this.addChild( resetAllButton );
 
+  //add full nuclide chart button
+  const fullNuclideChartText = new MultiLineText( fullNuclideChartString, merge( {
+    tandem: tandem.createTandem( 'fullNuclideChartText' )
+  }, {
+    font: LABEL_CONTROL_FONT,
+    maxWidth: 170
+  } ) );
+  const fullNuclideChartButton = new RectangularPushButton( {
+    content: fullNuclideChartText,
+    baseColor: 'rgb( 255, 200, 0 )',
+    listener: function() {
+      openPopup( 'https://energyeducation.ca/simulations/nuclear/nuclidechart.html' );
+    },
+    tandem: tandem.createTandem( 'fullNuclideChartButton' )
+  } );
+  this.addChild( fullNuclideChartButton );
+
   // Do the layout.
-  particleCountDisplay.top = CONTROLS_INSET;
-  particleCountDisplay.left = CONTROLS_INSET;
+  var dividingSpaces = ( resetAllButton.left - self.getChildren()[ 3 ].right - labelVisibilityControlPanel.width - fullNuclideChartButton.width ) / 3;
+  particleAtomDisplay.top = CONTROLS_INSET + 2.5;
+  particleAtomDisplay.left = CONTROLS_INSET + 195;
   this.periodicTableAccordionBox.top = CONTROLS_INSET;
   this.periodicTableAccordionBox.right = this.layoutBounds.maxX - CONTROLS_INSET;
-  labelVisibilityControlPanel.left = this.periodicTableAccordionBox.left;
-  labelVisibilityControlPanel.bottom = this.layoutBounds.height - CONTROLS_INSET;
+  this.nuclideChartAccordionBox.top = this.periodicTableAccordionBox.bottom + INTER_BOX_SPACING;
+  this.nuclideChartAccordionBox.right = this.periodicTableAccordionBox.right;
+  labelVisibilityControlPanel.left = self.getChildren()[ 3 ].right + dividingSpaces;
+  labelVisibilityControlPanel.bottom = this.layoutBounds.height - CONTROLS_INSET - 10;
   labelVisibilityControlPanelTitle.bottom = labelVisibilityControlPanel.top;
   labelVisibilityControlPanelTitle.centerX = labelVisibilityControlPanel.centerX;
-  electronViewButtonGroup.left = atomNode.right + 30;
-  electronViewButtonGroup.bottom = atomNode.bottom + 5;
+  fullNuclideChartButton.left = labelVisibilityControlPanel.right + dividingSpaces;
+  fullNuclideChartButton.top = labelVisibilityControlPanel.top;
 
   // Any other objects added by class calling it will be added in this node for layering purposes
   this.controlPanelLayer = new Node( { tandem: tandem.createTandem( 'controlPanelLayer' ) } );
@@ -371,10 +374,11 @@ buildAnAtom.register( 'AtomView', AtomView );
 inherit( ScreenView, AtomView, {
   reset: function() {
     this.periodicTableAccordionBoxExpandedProperty.reset();
+    this.nuclideChartAccordionBoxExpandedProperty.reset();
   }
 }, {
 
-  // export for usage when creating shred Particles
+  // export for usage when creating shred2 Particles
   NUM_NUCLEON_LAYERS: NUM_NUCLEON_LAYERS
 } );
 
