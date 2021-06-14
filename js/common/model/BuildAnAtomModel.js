@@ -3,6 +3,8 @@
 /**
  * Main model class for the first tab of the Build an Atom simulation.
  *
+ * animates nucleus stability here
+ *
  * @author John Blanco
  */
 
@@ -17,25 +19,22 @@ import inherit from '../../../../phet-core/js/inherit.js';
 import merge from '../../../../phet-core/js/merge.js';
 import SphereBucket from '../../../../phetcommon/js/model/SphereBucket.js';
 import PhetColorScheme from '../../../../scenery-phet/js/PhetColorScheme.js';
-import AtomIdentifier from '../../../../shred/js/AtomIdentifier.js';
-import Particle from '../../../../shred/js/model/Particle.js';
-import ParticleAtom from '../../../../shred/js/model/ParticleAtom.js';
-import ShredConstants from '../../../../shred/js/ShredConstants.js';
+import AtomIdentifier from '../../../../shred2/js/AtomIdentifier.js';
+import Particle from '../../../../shred2/js/model/Particle.js';
+import ParticleAtom from '../../../../shred2/js/model/ParticleAtom.js';
+import ShredConstants from '../../../../shred2/js/ShredConstants.js';
 import BooleanIO from '../../../../tandem/js/types/BooleanIO.js';
 import StringIO from '../../../../tandem/js/types/StringIO.js';
 import buildAnAtomStrings from '../../buildAnAtomStrings.js';
 import buildAnAtom from '../../buildAnAtom.js';
 import AtomView from '../view/AtomView.js';
 
-const electronsString = buildAnAtomStrings.electrons;
 const neutronsString = buildAnAtomStrings.neutrons;
 const protonsString = buildAnAtomStrings.protons;
 
 // constants
 const NUM_PROTONS = 10;
-const NUM_NEUTRONS = 13;
-const NUM_ELECTRONS = 10;
-const NUCLEON_CAPTURE_RADIUS = 100;
+const NUM_NEUTRONS = 12;
 const BUCKET_WIDTH = 120;
 const BUCKET_HEIGHT = BUCKET_WIDTH * 0.45;
 const BUCKET_Y_OFFSET = -205;
@@ -63,22 +62,17 @@ function BuildAnAtomModel( tandem, options ) {
     tandem: tandem.createTandem( 'showElementNameProperty' ),
     phetioState: options.phetioState
   } );
-  this.showNeutralOrIonProperty = new BooleanProperty( true, {
-    tandem: tandem.createTandem( 'showNeutralOrIonProperty' ),
-    phetioState: options.phetioState
-  } );
   this.showStableOrUnstableProperty = new BooleanProperty( false, {
     tandem: tandem.createTandem( 'showStableOrUnstableProperty' ),
     phetioState: options.phetioState
   } );
 
   // Property that controls electron depiction in the view.
-  this.electronShellDepictionProperty = new Property( 'orbits', {
+  this.electronShellDepictionProperty = new Property( 'orbitals', {
     tandem: tandem.createTandem( 'electronShellDepictionProperty' ),
     phetioState: options.phetioState,
-    phetioType: PropertyIO( StringIO ),
-    validValues: [ 'orbits', 'cloud' ]
-  } );
+    phetioType: PropertyIO( StringIO )
+  } );//, validValues: [ 'orbits', 'orbitals' ]
 
   // Create the atom that the user will build, modify, and generally play with.
   this.particleAtom = new ParticleAtom( {
@@ -87,9 +81,9 @@ function BuildAnAtomModel( tandem, options ) {
   } );
 
   // Create the buckets that will hold the sub-atomic particles.
-  this.buckets = {
+  this.buckets = {//changed positions since electron bucket gone
     protonBucket: new SphereBucket( {
-      position: new Vector2( -BUCKET_WIDTH * 1.1, BUCKET_Y_OFFSET ),
+      position: new Vector2( -BUCKET_WIDTH * 0.6, BUCKET_Y_OFFSET ),
       size: new Dimension2( BUCKET_WIDTH, BUCKET_HEIGHT ),
       sphereRadius: ShredConstants.NUCLEON_RADIUS,
       baseColor: PhetColorScheme.RED_COLORBLIND,
@@ -99,7 +93,7 @@ function BuildAnAtomModel( tandem, options ) {
       phetioState: options.phetioState
     } ),
     neutronBucket: new SphereBucket( {
-      position: new Vector2( 0, BUCKET_Y_OFFSET ),
+      position: new Vector2( BUCKET_WIDTH * 0.6, BUCKET_Y_OFFSET ),
       size: new Dimension2( BUCKET_WIDTH, BUCKET_HEIGHT ),
       sphereRadius: ShredConstants.NUCLEON_RADIUS,
       baseColor: 'rgb( 100, 100, 100 )',
@@ -107,38 +101,25 @@ function BuildAnAtomModel( tandem, options ) {
       captionColor: 'white',
       tandem: tandem.createTandem( 'neutronBucket' ),
       phetioState: options.phetioState
-    } ),
-    electronBucket: new SphereBucket( {
-      position: new Vector2( BUCKET_WIDTH * 1.1, BUCKET_Y_OFFSET ),
-      size: new Dimension2( BUCKET_WIDTH, BUCKET_HEIGHT ),
-      sphereRadius: ShredConstants.ELECTRON_RADIUS,
-      usableWidthProportion: 0.8,
-      baseColor: 'blue',
-      captionText: electronsString,
-      captionColor: 'white',
-      tandem: tandem.createTandem( 'electronBucket' ),
-      phetioState: options.phetioState
     } )
   };
 
   // Define a function that will decide where to put nucleons.
-  function placeNucleon( particle, bucket, atom ) {
-    if ( particle.positionProperty.get().distance( atom.positionProperty.get() ) < NUCLEON_CAPTURE_RADIUS ) {
+  function placeNucleon( particle, bucket, atom ) {//if nucleon is within nucleon capture radius, add particle to nucleus
+    if ( particle.positionProperty.get().y > -133 && particle.positionProperty.get().y < 80 && particle.positionProperty.get().x > -170 && particle.positionProperty.get().x < 170 ) {
       atom.addParticle( particle );
     }
-    else {
+    else {//otherwise add it to the bucket
       bucket.addParticleNearestOpen( particle, true );
     }
   }
 
   // Define the arrays where the subatomic particles will reside.
   this.nucleons = [];
-  this.electrons = [];
 
   // Add the protons.
   const protonGroupTandem = tandem.createGroupTandem( 'protons' );
   const neutronGroupTandem = tandem.createGroupTandem( 'neutrons' );
-  const electronGroupTandem = tandem.createGroupTandem( 'electrons' );
   _.times( NUM_PROTONS, function() {
     const proton = new Particle( 'proton', {
       tandem: protonGroupTandem.createNextTandem(),
@@ -164,26 +145,6 @@ function BuildAnAtomModel( tandem, options ) {
     neutron.userControlledProperty.link( function( userControlled ) {
       if ( !userControlled && !self.buckets.neutronBucket.containsParticle( neutron ) ) {
         placeNucleon( neutron, self.buckets.neutronBucket, self.particleAtom );
-      }
-    } );
-  } );
-
-  // Add the electrons.
-  _.times( NUM_ELECTRONS, function() {
-    const electron = new Particle( 'electron', {
-      tandem: electronGroupTandem.createNextTandem(),
-      maxZLayer: AtomView.NUM_NUCLEON_LAYERS - 1
-    } );
-    self.electrons.push( electron );
-    self.buckets.electronBucket.addParticleFirstOpen( electron, false );
-    electron.userControlledProperty.link( function( userControlled ) {
-      if ( !userControlled && !self.buckets.electronBucket.containsParticle( electron ) ) {
-        if ( electron.positionProperty.get().distance( Vector2.ZERO ) < self.particleAtom.outerElectronShellRadius * 1.1 ) {
-          self.particleAtom.addParticle( electron );
-        }
-        else {
-          self.buckets.electronBucket.addParticleNearestOpen( electron, true );
-        }
       }
     } );
   } );
@@ -222,10 +183,6 @@ function BuildAnAtomModel( tandem, options ) {
   this.nucleusJumpCount = 0;
 }
 
-// Externally visible constants
-BuildAnAtomModel.MAX_CHARGE = Math.max( NUM_PROTONS, NUM_ELECTRONS );
-BuildAnAtomModel.MAX_ELECTRONS = NUM_ELECTRONS;
-
 buildAnAtom.register( 'BuildAnAtomModel', BuildAnAtomModel );
 
 inherit( Object, BuildAnAtomModel, {
@@ -237,16 +194,14 @@ inherit( Object, BuildAnAtomModel, {
 
     // next dispose the root (non-derived) properties
     this.showElementNameProperty.dispose();
-    this.showNeutralOrIonProperty.dispose();
+    ///this.showNeutralOrIonProperty.dispose();
     this.showStableOrUnstableProperty.dispose();
     this.electronShellDepictionProperty.dispose();
 
     // etc...
     this.particleAtom.dispose();
     this.buckets.protonBucket.dispose();
-    this.buckets.electronBucket.dispose();
     this.buckets.neutronBucket.dispose();
-    this.electrons.forEach( function( electron ) { electron.dispose();} );
     this.nucleons.forEach( function( nucleon ) { nucleon.dispose();} );
   },
 
@@ -256,9 +211,6 @@ inherit( Object, BuildAnAtomModel, {
     // Update particle positions.
     this.nucleons.forEach( function( nucleon ) {
       nucleon.step( dt );
-    } );
-    this.electrons.forEach( function( electron ) {
-      electron.step( dt );
     } );
 
     // Animate the unstable nucleus by making it jump periodically.
@@ -304,7 +256,6 @@ inherit( Object, BuildAnAtomModel, {
   // @public
   reset: function() {
     this.showElementNameProperty.reset();
-    this.showNeutralOrIonProperty.reset();
     this.showStableOrUnstableProperty.reset();
     this.electronShellDepictionProperty.reset();
 
@@ -314,11 +265,6 @@ inherit( Object, BuildAnAtomModel, {
         nucleon.moveImmediatelyToDestination();
       }
     } );
-    this.electrons.forEach( function( electron ) {
-      if ( !electron.positionProperty.get().equals( electron.destinationProperty.get() ) ) {
-        electron.moveImmediatelyToDestination();
-      }
-    } );
 
     // Remove all particles from the particle atom.
     this.particleAtom.clear();
@@ -326,7 +272,6 @@ inherit( Object, BuildAnAtomModel, {
     // Remove all particles from the buckets.
     this.buckets.protonBucket.reset();
     this.buckets.neutronBucket.reset();
-    this.buckets.electronBucket.reset();
 
     // Add all the particles back to their buckets so that they are
     // stacked in their original configurations.
@@ -338,9 +283,6 @@ inherit( Object, BuildAnAtomModel, {
       else {
         self.buckets.neutronBucket.addParticleFirstOpen( nucleon, false );
       }
-    } );
-    this.electrons.forEach( function( electron ) {
-      self.buckets.electronBucket.addParticleFirstOpen( electron, false );
     } );
   },
 
@@ -374,12 +316,6 @@ inherit( Object, BuildAnAtomModel, {
       numberAtom.neutronCountProperty.get(),
       this.particleAtom.neutrons,
       this.buckets.neutronBucket
-    );
-    moveParticlesToAtom(
-      this.particleAtom.electrons.length,
-      numberAtom.electronCountProperty.get(),
-      this.particleAtom.electrons,
-      this.buckets.electronBucket
     );
 
     // Finalize particle positions.
