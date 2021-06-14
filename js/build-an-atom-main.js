@@ -9,8 +9,6 @@ import simLauncher from '../../joist/js/simLauncher.js';
 import Tandem from '../../tandem/js/Tandem.js';
 import buildAnAtomStrings from './buildAnAtomStrings.js';
 import BuildAnAtomScreen from './buildanatom/BuildAnAtomScreen.js';
-import GameScreen from './game/GameScreen.js';
-import SymbolScreen from './symbol/SymbolScreen.js';
 
 const buildAnAtomTitleString = buildAnAtomStrings[ 'build-an-atom' ].title;
 
@@ -31,14 +29,5 @@ const simOptions = {
 };
 
 simLauncher.launch( function() {
-  const screens = [
-    new BuildAnAtomScreen( tandem.createTandem( 'atomScreen' ) ),
-    new SymbolScreen( tandem.createTandem( 'symbolScreen' ) )
-  ];
-
-  // PhET-iO does not support the game screen (yet), see https://github.com/phetsims/build-an-atom/issues/156
-  if ( !Tandem.PHET_IO_ENABLED ) {
-    screens.push( new GameScreen( tandem.createTandem( 'gameScreen' ) ) );
-  }
-  new Sim( buildAnAtomTitleString, screens, simOptions ).start();
+  new Sim( buildAnAtomTitleString, [ new BuildAnAtomScreen( tandem.createTandem( 'atomScreen' ) ) ], simOptions ).start();
 } );
