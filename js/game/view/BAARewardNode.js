@@ -8,8 +8,8 @@
 
 import inherit from '../../../../phet-core/js/inherit.js';
 import FaceNode from '../../../../scenery-phet/js/FaceNode.js';
-import AtomIdentifier from '../../../../shred/js/AtomIdentifier.js';
-import NumberAtom from '../../../../shred/js/model/NumberAtom.js';
+import AtomIdentifier from '../../../../shred2/js/AtomIdentifier.js';
+import NumberAtom from '../../../../shred2/js/model/NumberAtom.js';
 import RewardNode from '../../../../vegas/js/RewardNode.js';
 import buildAnAtom from '../../buildAnAtom.js';
 import InteractiveSymbolNode from './InteractiveSymbolNode.js';

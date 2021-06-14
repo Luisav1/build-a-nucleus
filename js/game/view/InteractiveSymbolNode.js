@@ -16,8 +16,8 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import AtomIdentifier from '../../../../shred/js/AtomIdentifier.js';
-import ShredConstants from '../../../../shred/js/ShredConstants.js';
+import AtomIdentifier from '../../../../shred2/js/AtomIdentifier.js';
+import ShredConstants from '../../../../shred2/js/ShredConstants.js';
 import buildAnAtom from '../../buildAnAtom.js';
 import NumberEntryNode from './NumberEntryNode.js';
 

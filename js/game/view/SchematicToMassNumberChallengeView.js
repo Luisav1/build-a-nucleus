@@ -14,7 +14,7 @@ import inherit from '../../../../phet-core/js/inherit.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import MultiLineText from '../../../../scenery-phet/js/MultiLineText.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import NumberAtom from '../../../../shred/js/model/NumberAtom.js';
+import NumberAtom from '../../../../shred2/js/model/NumberAtom.js';
 import buildAnAtomStrings from '../../buildAnAtomStrings.js';
 import buildAnAtom from '../../buildAnAtom.js';
 import ChallengeView from './ChallengeView.js';

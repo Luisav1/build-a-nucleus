@@ -10,7 +10,7 @@
  * @author John Blanco
  */
 
-import NumberAtom from '../../../../shred/js/model/NumberAtom.js';
+import NumberAtom from '../../../../shred2/js/model/NumberAtom.js';
 import buildAnAtom from '../../buildAnAtom.js';
 
 // Challenge pools for creating game challenges, extracted from the design doc.

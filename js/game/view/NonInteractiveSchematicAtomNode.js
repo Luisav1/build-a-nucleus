@@ -9,10 +9,10 @@
 import Property from '../../../../axon/js/Property.js';
 import inherit from '../../../../phet-core/js/inherit.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
-import Particle from '../../../../shred/js/model/Particle.js';
-import ParticleAtom from '../../../../shred/js/model/ParticleAtom.js';
-import AtomNode from '../../../../shred/js/view/AtomNode.js';
-import ParticleView from '../../../../shred/js/view/ParticleView.js';
+import Particle from '../../../../shred2/js/model/Particle.js';
+import ParticleAtom from '../../../../shred2/js/model/ParticleAtom.js';
+import AtomNode from '../../../../shred2/js/view/AtomNode.js';
+import ParticleView from '../../../../shred2/js/view/ParticleView.js';
 import buildAnAtom from '../../buildAnAtom.js';
 import AtomView from '../../common/view/AtomView.js';
 

@@ -9,7 +9,7 @@
  */
 
 import inherit from '../../../../phet-core/js/inherit.js';
-import NumberAtom from '../../../../shred/js/model/NumberAtom.js';
+import NumberAtom from '../../../../shred2/js/model/NumberAtom.js';
 import buildAnAtom from '../../buildAnAtom.js';
 import ChallengeView from './ChallengeView.js';
 import InteractiveSymbolNode from './InteractiveSymbolNode.js';

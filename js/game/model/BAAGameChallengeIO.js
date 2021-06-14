@@ -7,7 +7,7 @@
  */
 
 import validate from '../../../../axon/js/validate.js';
-import NumberAtomIO from '../../../../shred/js/model/NumberAtomIO.js';
+import NumberAtomIO from '../../../../shred2/js/model/NumberAtomIO.js';
 import ObjectIO from '../../../../tandem/js/types/ObjectIO.js';
 import buildAnAtom from '../../buildAnAtom.js';
 

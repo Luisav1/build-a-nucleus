@@ -14,7 +14,7 @@ import HBox from '../../../../scenery/js/nodes/HBox.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import ShredConstants from '../../../../shred/js/ShredConstants.js';
+import ShredConstants from '../../../../shred2/js/ShredConstants.js';
 import LevelSelectionButton from '../../../../vegas/js/LevelSelectionButton.js';
 import massChargeIcon from '../../../images/mass_charge_icon_png.js';
 import periodicTableIcon from '../../../images/periodic_table_icon_png.js';
