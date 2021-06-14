@@ -11,12 +11,12 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import AtomIdentifier from '../../../../shred/js/AtomIdentifier.js';
-import PeriodicTableNode from '../../../../shred/js/view/PeriodicTableNode.js';
+import AtomIdentifier from '../../../../shred2/js/AtomIdentifier.js';
+import PeriodicTableNode from '../../../../shred2/js/view/PeriodicTableNode.js';
 import buildAnAtom from '../../buildAnAtom.js';
 
 // constants
-const SYMBOL_WIDTH_PROPORTION = 0.2;
+const SYMBOL_WIDTH_PROPORTION = 0.1;
 const SYMBOL_ASPECT_RATIO = 1.0; // Width/height.
 
 /**
@@ -57,7 +57,7 @@ function PeriodicTableAndSymbol( numberAtom, tandem, options ) {
   numberAtom.protonCountProperty.link( function( protonCount ) {
     symbolRectangle.removeAllChildren();
     const symbolText = new Text( AtomIdentifier.getSymbol( protonCount ), {
-      font: new PhetFont( { size: 48, weight: 'bold' } )
+      font: new PhetFont( { size: 36, weight: 'bold' } )
     } );
     symbolText.scale( Math.min( Math.min( symbolRectangle.width * 0.8 / symbolText.width, symbolRectangle.height * 0.8 / symbolText.height ), 1 ) );
     symbolText.center = new Vector2( symbolRectangle.width / 2, symbolRectangle.height / 2 );
