@@ -35,7 +35,7 @@ function BuildAnAtomView( model, tandem ) {
   } );
 
   // Add the symbol node within an accordion box.
-  const symbolNode = new SymbolNode( 'BuildAnAtomView', model.particleAtom, tandem.createTandem( 'symbolNode' ), {
+  const symbolNode = new SymbolNode( model.particleAtom, tandem.createTandem( 'symbolNode' ), {
     scale: 0.25// scale empirically determined
   } );
   const symbolAccordionBox = new AccordionBox( symbolNode, {
