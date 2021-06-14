@@ -11,20 +11,16 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import inherit from '../../../../phet-core/js/inherit.js';
 import PhetColorScheme from '../../../../scenery-phet/js/PhetColorScheme.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import Image from '../../../../scenery/js/nodes/Image.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import AtomIdentifier from '../../../../shred/js/AtomIdentifier.js';
-import ShredConstants from '../../../../shred/js/ShredConstants.js';
-import scaleIcon from '../../../images/scale_png.js';
+import AtomIdentifier from '../../../../shred2/js/AtomIdentifier.js';
 import buildAnAtom from '../../buildAnAtom.js';
-import ChargeMeter from '../../common/view/ChargeMeter.js';
 
 // constants
-const SYMBOL_BOX_WIDTH = 275; // In screen coords, which are roughly pixels.
-const SYMBOL_BOX_HEIGHT = 300; // In screen coords, which are roughly pixels.
-const NUMBER_FONT = new PhetFont( 56 );
+const SYMBOL_BOX_WIDTH = 245; // In screen coords, which are roughly pixels.
+const SYMBOL_BOX_HEIGHT = 290; // In screen coords, which are roughly pixels.
+const NUMBER_FONT = new PhetFont( 57 );
 const NUMBER_INSET = 20; // In screen coords, which are roughly pixels.
 
 /**
@@ -36,7 +32,6 @@ const NUMBER_INSET = 20; // In screen coords, which are roughly pixels.
 function SymbolNode( numberAtom, tandem, options ) {
 
   Node.call( this, { tandem: tandem, pickable: false } );
-
   // Add the bounding box, which is also the root node for everything else
   // that comprises this node.
   const boundingBox = new Rectangle( 0, 0, SYMBOL_BOX_WIDTH, SYMBOL_BOX_HEIGHT, 0, 0, {
@@ -49,7 +44,7 @@ function SymbolNode( numberAtom, tandem, options ) {
 
   // Add the symbol text.
   const symbolText = new Text( '', {
-    font: new PhetFont( 150 ),
+    font: new PhetFont( 120 ),
     fill: 'black',
     center: new Vector2( SYMBOL_BOX_WIDTH / 2, SYMBOL_BOX_HEIGHT / 2 ),
     tandem: tandem.createTandem( 'symbolText' )
@@ -94,41 +89,48 @@ function SymbolNode( numberAtom, tandem, options ) {
     massNumberDisplay.top = NUMBER_INSET;
   } );
 
-  // Add the charge display.
-  const chargeDisplay = new Text( '0', {
-    font: NUMBER_FONT,
+  // Add the isotope naming notation
+  const isotopeText = new Text( '', {
+    font: new PhetFont( 57 ),
     fill: 'black',
-    tandem: tandem.createTandem( 'chargeDisplay' )
+    center: new Vector2( 220, SYMBOL_BOX_HEIGHT + 35 ),
+    tandem: tandem.createTandem( 'isotopeText' )
   } );
-  boundingBox.addChild( chargeDisplay );
+  this.addChild( isotopeText );
 
-  // Add the listener to update the charge.
-  numberAtom.chargeProperty.link( function( charge ) {
-    chargeDisplay.text = ( charge > 0 ? '+' : '' ) + charge;
-    chargeDisplay.fill = ShredConstants.CHARGE_TEXT_COLOR( charge );
-    chargeDisplay.right = SYMBOL_BOX_WIDTH - NUMBER_INSET;
-    chargeDisplay.top = NUMBER_INSET;
+  //Add the listener to update the isotope name
+  numberAtom.protonCountProperty.link( function( protonCount ) {
+    const isotope = AtomIdentifier.getName( protonCount );
+    isotopeText.text = protonCount > 0 ? isotope : '';
+    isotopeText.right = 210;
+    isotopeText.top = SYMBOL_BOX_HEIGHT + 35;
   } );
 
-  // Add the scale image - just an image with no functionality.
-  const scaleImage = new Image( scaleIcon, { tandem: tandem.createTandem( 'scaleImage' ) } );
-  scaleImage.scale( 0.32 ); // Scale empirically determined to match design layout.
-  this.addChild( scaleImage );
-
-  // Add the charge meter.
-  const chargeMeter = new ChargeMeter( numberAtom, tandem.createTandem( 'chargeMeter' ), {
-    showNumericalReadout: false
+  //add the isotope number notation aka mass number
+  const isotopeNumText = new Text( '', {
+    font: new PhetFont( 57 ),
+    fill: 'black',
+    center: new Vector2( 270, SYMBOL_BOX_HEIGHT + 67.5 ),
+    tandem: tandem.createTandem( 'isotopeText' )
   } );
-  chargeMeter.scale( 1.5 );
-  this.addChild( chargeMeter );
+  this.addChild( isotopeNumText );
+
+  //add listener to update the isotope text mass number 
+  numberAtom.massNumberProperty.link( function( massNumber ) {
+    isotopeNumText.text = massNumber > 0 ? ' - ' + massNumber : '';
+    if ( massNumber < 10 ) {
+      isotopeNumText.center = new Vector2( 250, SYMBOL_BOX_HEIGHT + 67.5 );
+    }
+    else {
+      isotopeNumText.center = new Vector2( 265, SYMBOL_BOX_HEIGHT + 67.5 );
+    }
+  } );
 
   // Do the layout.
-  scaleImage.left = 0;
-  scaleImage.centerY = massNumberDisplay.centerY;
   boundingBox.top = 0;
-  boundingBox.left = scaleImage.right + 10;
-  chargeMeter.left = boundingBox.right + 10;
-  chargeMeter.centerY = chargeDisplay.centerY;
+  boundingBox.left = 20;
+  isotopeText.left = 0;
+  isotopeText.centerY = boundingBox.bottom + 5;
 
   this.mutate( options );
 }
