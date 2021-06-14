@@ -33,7 +33,7 @@
     "value": "What is the\nmass number?"
   },
   "build-an-atom.title": {
-    "value": "Build an Atom"
+    "value": "Build a Nucleus"
   },
   "whatIsTheTotalCharge": {
     "value": "What is the\ntotal charge?"
@@ -65,6 +65,9 @@
   "cloud": {
     "value": "Cloud"
   },
+  "protonAxis": {
+    "value": "Proton number"
+  },
   "neutronsColon": {
     "value": "Neutrons:"
   },
@@ -73,6 +76,9 @@
   },
   "electrons": {
     "value": "Electrons"
+  },
+  "neutronAxis": {
+    "value": "Neutron number"
   },
   "isIt": {
     "value": "Is it:"
@@ -85,5 +91,47 @@
   },
   "chooseYourGame": {
     "value": "Choose Your Game!"
+  },
+  "partialNuclideChart": {
+    "value": "Partial Nuclide Chart"
+  },
+  "fullNuclideChart": {
+    "value": "Full Nuclide Chart"
+  },
+  "alphaDecay": {
+    "value": "α decay"
+  },
+  "betaMinusDecay": {
+    "value": "β- decay"
+  },
+  "betaPlusDecay": {
+    "value": "β+ decay /"
+  },
+  "electronCapture": {
+    "value": "electron capture"
+  },
+  "neutronEmission": {
+    "value": "Neutron emission"
+  },
+  "protonEmission": {
+    "value": "Proton emission"
+  },
+  "stable": {
+    "value": "Stable"
+  },
+  "unstable": {
+    "value": "Unstable"
+  },
+  "selected": {
+    "value": "Selected"
+  },
+  "magicNumbers": {
+    "value": "Magic numbers"
+  },
+  "doesNotForm": {
+    "value": "Does not form"
+  },
+  "energyEducationWebsite": {
+    "value": "Energy Education website..."
   }
 }
